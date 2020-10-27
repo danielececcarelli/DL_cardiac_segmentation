@@ -21,6 +21,7 @@ TEST_DATA_DIR = os.path.join(WORKING_DIR, DATA_NAME, TEST_SOURCE)
 
 def main():
 
+	# class to load sunnybrook data (from https://github.com/mshunshin/SegNetCMR)
 	class GetData():
 		def __init__(self, data_dir):
 		    images_list =[]
@@ -61,36 +62,39 @@ def main():
 		    self.images = np.array(images_list)
 		    self.labels = np.array(labels_list)
 
+	# load train and test data of Sunnybrook Dataset
     train_data = GetData(TRAIN_DATA_DIR)
     test_data = GetData(TEST_DATA_DIR)
     print(train_data.images.shape)
     print(train_data.labels.shape)
 
 
+	# split the train_data in train and validation
     np.random.seed(10)
     index = np.random.permutation(526)
-    #print(index)
-    ### 526 -> 450 train, 76 val
+    
+    # tot of 526 -> 450 for train, 76 for validation
 
+	# train -> first 450 of permutation index
     x_train = train_data.images[index[0:450],:,:,:]
     y_train = train_data.labels[index[0:450],:,:,:]
-    print(x_train.shape)
     x_train = np.array(x_train, dtype=np.float32)
     y_train = np.array(y_train, dtype=np.float32)
 
-
+	# val -> from 450 to 526 (last 76) of permutation index
     x_val = train_data.images[index[450:],:,:,:]
     y_val = train_data.labels[index[450:],:,:,:]
     x_val = np.array(x_val, dtype=np.float32)
     y_val = np.array(y_val, dtype=np.float32)
 
-
+	# test -> from test_data
     x_test = test_data.images
     y_test = test_data.labels
     x_test = np.array(x_test, dtype=np.float32)
     y_test = np.array(y_test, dtype=np.float32)
 
 
+	# initialize the UNet
     bb = "vgg16"
     input_shape = (256,256,3)
     c = 1
@@ -106,10 +110,14 @@ def main():
     modelUnet = Model(inp, out, name=base_model.name)
     modelUnet.compile('Adam', loss=dice_loss, metrics=[iou_score])
 
+
+	### no training here, we've alredy done ###
+	# now we can load the model that was trained before
     print("loading model" )
     modelUnet.load_weights("modelUnet_sunnybrook_100epochs.keras")
     print("model loaded")
 
+	# function to plot simultaneously a train, a validation and a test example with our prediction
     def plot_three(n=0):
         y_pred_train = modelUnet.predict(x_train[n:(n+1),:,:,:])
         y_pred_val = modelUnet.predict(x_val[n:(n+1),:,:,:])
@@ -158,6 +166,7 @@ def main():
         plot_name = "plot/plot_" + str(n) + ".png"
         plt.savefig(plot_name)
 
+	# try the first 76 images of train,val and test
     k = 76 #number from 0 to 75
     for i in range(k):
         print("plotting ", i+1, " out of ", k )
