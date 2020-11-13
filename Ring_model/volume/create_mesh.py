@@ -177,14 +177,14 @@ class mesh_creator:
         self.output_points_filename = output_points_filename #'points_final.npz'
 
     def create_mesh(self):
-        remove_0_slice = True #this just removes the 0 slice if you don't like it
+        remove_0_slice = False #this just removes the 0 slice if you don't like it
 
-        sampling_endo = 100  #number of points to put on endo
-        sampling_epi = 100 #number of points to put on epi
+        sampling_endo = 60  #number of points to put on endo
+        sampling_epi = 60 #number of points to put on epi
         slice_sampling = 15 #number of vertical slices to generate (there will be 1 extra)
 
-        inplane_smoothing = 2 #set by trial and error, depends on number of sampling points
-        betweenplane_smoothing = 2 #set by trial and error, depends on number of sampling points
+        inplane_smoothing = 3 #set by trial and error, depends on number of sampling points
+        betweenplane_smoothing = 3 #set by trial and error, depends on number of sampling points
 
         #load the points
         npzfile = np.load(self.input_filename)

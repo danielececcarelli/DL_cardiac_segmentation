@@ -25,9 +25,9 @@ import itk
 # "patient091","patient100","patient110","patient124","patient135",
 # "patient140","patient151","patient166","patient176","patient187")
 
-def load_segmentation_model(n, dataloader):
+def load_segmentation_model(dataloader):
 
-    bb = "resnet50"
+    bb = "vgg16"
     input_shape = (256,256,3)
     c = 1
     enc_weights = "imagenet"
@@ -51,13 +51,7 @@ def load_segmentation_model(n, dataloader):
     modelUnet = Model(inp, out, name=base_model.name)
     modelUnet.compile(optim, loss=loss, metrics=[metrics])
 
-    name = "prova" + str(n) + "_model"
-    path = ""
-
-    for root, dirs, files in os.walk(os.path.join(path,name)):
-        for file in sorted(files):
-            if file.endswith("best.h5")==True:
-                modelUnet.load_weights(os.path.join(path,root,file))
+    modelUnet.load_weights("models_result/vgg16_100epochs_batch4/modelUnet_ring_dropout_vgg16_best.h5")
 
     y_pred = modelUnet.predict(dataloader)
     return y_pred
@@ -134,9 +128,9 @@ class Dataloder(tf.keras.utils.Sequence):
             self.indexes = np.random.permutation(self.indexes)
 
 
-patient_name = "patient008"
-path_x = "acdc_data/result_images"
-path_y = "acdc_data/result_labels"
+patient_name = "patient008-ED"
+path_x = "test_data/images"
+path_y = "test_data/labels"
 
 patient = Single_Patient(path_x, path_y, patient_name)
 
@@ -147,12 +141,12 @@ print("load data...")
 dataloader_patient = Dataloder(patient, 1, False)
 
 
-n = 3
-print("load model weight = ",n)
+print("load model weight = ")
 print("prediction...")
-y_pred = load_segmentation_model(n, dataloader_patient)
+y_pred = load_segmentation_model(dataloader_patient)
 
 print("done")
+
 
 yy_pred = (255.*y_pred).astype(np.uint8)
 
