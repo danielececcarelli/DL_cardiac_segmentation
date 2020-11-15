@@ -42,10 +42,29 @@ Example of generated augmented images and relatively augmented masks
 <img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/augm_image.png" width=400/> <img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/augm_mask.png" width=400/> 
 
 #### Result:
-
 <img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/result_example.png" width="1000" title="Examples of ring segmentation from train/val/test set">
 
 ## 3D Mesh building and Shape Refinement
+Pipeline for shape refinement and building volume:
+1) Extract the endo and epi from ring images using OpenCV
+2) Extract contours of both endo and epi from the slices
+3) (Optionally) Shift correction for the contours
+4) Create the volume
+5) Add the apex if required
+
+All the code for points 2 to 5 comes from https://github.com/cbutakoff/tools/tree/master/Python/mri_mesh_from_contours
+
+Result examples from a test set patient
+
+<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/example_shape_refinement.png" width="1000" title="Result examples from a test set patient">
+
+Comparison between true volume and predicted with our Cardiac Deep Learning
+
+<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/comparison_pred_true_volume_TEST_patient008_ed.png" width="1000" title="Comparison between true volume and predicted with Deep Learning">
 
 ## 4D Segmentation
+Finally, we can segment the volume of LV during a complete cardiac cycle to see the cardiac dynamic of the Ventricle. Below an example from ACDC Dataset:
+
+
+<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/4D_segment.gif" width="1000" title="4D segmentation">
 
