@@ -1,7 +1,7 @@
 # Deep Learning for cardiac segmentation
 ***Deep Learning for Cardiac images Segmentation: semi-automatic method to build Left Ventricle mesh***
 
-![alt text](https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/4D_segment.gif)
+![alt text](https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/4D_segment_2.gif)
 
 ## Project Outline
 - 2D automatic segmentation for Short Axis MRI Endocardium
@@ -73,4 +73,4 @@ Comparison between true volume and predicted with our Cardiac Deep Learning
 Finally, we can segment the volume of LV during a **complete cardiac cycle** to see the **cardiac dynamic** of the Ventricle. Below an example from ACDC Dataset:
 
 
-<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/4D_segment.gif" width="1000" title="4D segmentation"/>
+<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/4D_segment_2.gif" width="1000" title="4D segmentation"/>
