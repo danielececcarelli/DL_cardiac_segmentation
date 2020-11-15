@@ -38,13 +38,14 @@ Data augmentation using ![Albumentation library](https://github.com/albumentatio
 - Random change of brightness
 
 Example of generated augmented images and relatively augmented masks
-<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/augm_image.png" width=500> 
-<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/augm_mask.png" width=500> 
 
-Result:
+<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/augm_image.png" width=400/> <img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/augm_mask.png" width=400/> 
 
-<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/result_example.png" width="500" title="Examples of ring segmentation from train/val/test set">
+#### Result:
 
+<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/result_example.png" width="1000" title="Examples of ring segmentation from train/val/test set">
+
+## 3D Mesh building and Shape Refinement
 
 ## 4D Segmentation
 
