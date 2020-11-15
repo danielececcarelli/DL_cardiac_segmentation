@@ -22,12 +22,28 @@ All the models are built using the python library "Segmentation Models" ![SM](ht
 - Segmentation of LV Endocardium on sunnybrook dataset using UNet with VGG16 ![python notebook](https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/First_model/sunnybrook_data/train_sunnybrook.ipynb)
 - Segmentation of LV Endocardium, LV Epicardium and RV on ACDC dataset using UNet with VGG16 ![python notebook in colab](https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/First_model/acdc_data/train_acdc_with_google_colab.ipynb)
 
-UNet model architecure ![img](https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/U-net.png)
+UNet model architecure 
+<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/U-net.png" width="500" title="UNet architecture">
+
 Source: ![UNet](https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/)
 
 ## Ring Model: segmentation on Sunnybrook and ACDC together
 Segmentation of LV Myocardium on a dataset with both Sunnybrook and ACDC data
 
+Data augmentation using ![Albumentation library](https://github.com/albumentations-team/albumentations) :
+- Random-sized crop
+- Horizontal and Vertical flip
+- Random rotation with an angle in [-90°,90°]
+- Blur the image
+- Random change of brightness
+
+Example of generated augmented images and relatively augmented masks
+<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/augm_image.png" width=500> 
+<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/augm_mask.png" width=500> 
+
+Result:
+
+<img src="https://github.com/danielececcarelli/DL_cardiac_segmentation/blob/main/img/result_example.png" width="500" title="Examples of ring segmentation from train/val/test set">
 
 
 ## 4D Segmentation
